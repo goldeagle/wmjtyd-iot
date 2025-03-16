@@ -1,0 +1,77 @@
+# 应用配置
+app:
+  host: "127.0.0.1"
+  port: ":3000"
+  embed: true
+  root: "/static"
+  prefork: true # prefork是否启用，默认true
+  
+# 数据库配置
+database:
+  type: "mysql"
+  enable: true
+  host: "127.0.0.1"
+  port: 3306
+  dbname: "wmjtyd-iot"
+  user: "wmjtyd-iot"
+  password: "wmjtyd-iot"
+  chartset: "utf8mb4"
+  max_idle_conns: 10 # 空闲连接池中连接的最大数量
+  max_open_conns: 100 # 打开数据库连接的最大数量
+  max_life_time: 3600 # 连接可复用的最大时间(s)
+  log_mode: info # 日志级别
+  enable_file_log_writer: true # 是否启用日志文件
+  log_filename: sql.log # 日志文件名称
+  table_prefix: "wmjtyd_" # 表名前缀
+
+# redis配置
+redis:
+  enable: false
+  host: "127.0.0.1"
+  port: "6379"
+  database: 0
+  password: ""
+
+# TDengine 配置
+taos:
+  enable: false
+  host: "localhost"
+  port: 6030
+  database: "iothub"
+  user: "root"
+  password: "taosdata"
+
+# 日志配置
+log:
+  enable: true
+  #日志文件的位置，也就是路径
+  filename: "./logs/log.txt"
+  #在进行切割之前，日志文件的最大大小（以MB为单位）
+  maxSize: 10
+  #保留旧文件的最大个数
+  maxBackups: 10
+  #保留旧文件的最大天数
+  maxAges: 180
+  #是否压缩/归档旧文件
+  compress: false
+
+#单位(60秒*60*24) 24小时
+jwt:
+  name: "Authorization"
+  secret: "wmjtyd-iotavHGsfjcSb9ldv5BXzo8C6qsRlx6"
+  expire: 72 # hour
+  secret_key: "secret"
+  secret_key_expire_minutes_count: 500
+  refresh_key: "refresh"
+  refresh_key_expire_hours_count: 720
+
+# MQTT配置
+mqtt:
+  host: "117.21.200.21"
+  port: 1883
+  username: "iothub"
+  password: "iothub"
+  client_id: "wmjtyd_mqtt01"
+  keepalive: 60
+  qos: 1
+  namespace: "wmjtyd/v1.0"
