@@ -1,3 +1,4 @@
+CREATE DATABASE IF NOT EXISTS `wmjtyd-iot`;
 CREATE TABLE IF NOT EXISTS `wmjtyd_captcha` (
   `id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `phone` varchar(255) NOT NULL,
@@ -56,9 +57,7 @@ CREATE TABLE IF NOT EXISTS `wmjtyd_device_info` (
   `created_time` int,
   `updated_time` int,
   `model_id` int,
-  `data_source_id` int,
   `location_id` int,
-  `configure_id` int,
   `user_id` int,
   `group_id` int,
   `online_time` int,

@@ -1,0 +1,648 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "IoT设备管理平台API",
+    "description": "物联网设备管理平台API文档",
+    "contact": {
+      "email": "support@wmjtyd.com",
+      "name": "API支持"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "localhost:8080",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "设备日志",
+      "description": "设备日志相关操作"
+    },
+    {
+      "name": "设备指令", 
+      "description": "设备指令相关操作"
+    },
+    {
+      "name": "设备固件",
+      "description": "设备固件相关操作"
+    },
+    {
+      "name": "设备配置",
+      "description": "设备配置相关操作"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/api/device/log": {
+      "post": {
+        "tags": ["设备日志"],
+        "summary": "创建设备日志",
+        "description": "创建新的设备日志记录",
+        "operationId": "createDeviceLog",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "设备日志对象",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceLog"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "schema": {
+              "$ref": "#/definitions/Response«DeviceLog»"
+            }
+          },
+          "400": {
+            "description": "无效输入"
+          },
+          "500": {
+            "description": "服务器内部错误"
+          }
+        }
+      },
+      "get": {
+        "tags": ["设备日志"],
+        "summary": "获取设备日志列表",
+        "description": "分页获取设备日志列表",
+        "operationId": "getDeviceLogs",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "页码",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "每页数量",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 10
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "schema": {
+              "$ref": "#/definitions/Response«List«DeviceLog»»"
+            }
+          },
+          "500": {
+            "description": "服务器内部错误"
+          }
+        }
+      }
+    },
+    "/api/device/log/{id}": {
+      "get": {
+        "tags": ["设备日志"],
+        "summary": "获取设备日志详情",
+        "description": "根据ID获取设备日志详情",
+        "operationId": "getDeviceLogById",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "日志ID",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "schema": {
+              "$ref": "#/definitions/Response«DeviceLog»"
+            }
+          },
+          "400": {
+            "description": "无效ID"
+          },
+          "404": {
+            "description": "未找到"
+          }
+        }
+      },
+      "put": {
+        "tags": ["设备日志"],
+        "summary": "更新设备日志",
+        "description": "根据ID更新设备日志",
+        "operationId": "updateDeviceLog",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "日志ID",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "设备日志对象",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceLog"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "schema": {
+              "$ref": "#/definitions/Response«DeviceLog»"
+            }
+          },
+          "400": {
+            "description": "无效输入"
+          },
+          "404": {
+            "description": "未找到"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["设备日志"],
+        "summary": "删除设备日志",
+        "description": "根据ID删除设备日志",
+        "operationId": "deleteDeviceLog",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "日志ID",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          },
+          "400": {
+            "description": "无效ID"
+          },
+          "404": {
+            "description": "未找到"
+          }
+        }
+      }
+    },
+    "/api/device/cmd": {
+      "post": {
+        "tags": ["设备指令"],
+        "summary": "创建设备指令",
+        "description": "创建新的设备指令记录",
+        "operationId": "createDeviceCmd",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "设备指令对象",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceCmd"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "schema": {
+              "$ref": "#/definitions/Response«DeviceCmd»"
+            }
+          },
+          "400": {
+            "description": "无效输入"
+          },
+          "500": {
+            "description": "服务器内部错误"
+          }
+        }
+      },
+      "get": {
+        "tags": ["设备指令"],
+        "summary": "获取设备指令列表",
+        "description": "分页获取设备指令列表",
+        "operationId": "getDeviceCmds",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "页码",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "每页数量",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 10
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "schema": {
+              "$ref": "#/definitions/Response«List«DeviceCmd»»"
+            }
+          },
+          "500": {
+            "description": "服务器内部错误"
+          }
+        }
+      }
+    },
+    "/api/device/cmd/{id}": {
+      "get": {
+        "tags": ["设备指令"],
+        "summary": "获取设备指令详情",
+        "description": "根据ID获取设备指令详情",
+        "operationId": "getDeviceCmdById",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "指令ID",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "schema": {
+              "$ref": "#/definitions/Response«DeviceCmd»"
+            }
+          },
+          "400": {
+            "description": "无效ID"
+          },
+          "404": {
+            "description": "未找到"
+          }
+        }
+      },
+      "put": {
+        "tags": ["设备指令"],
+        "summary": "更新设备指令",
+        "description": "根据ID更新设备指令",
+        "operationId": "updateDeviceCmd",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "指令ID",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "设备指令对象",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceCmd"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "schema": {
+              "$ref": "#/definitions/Response«DeviceCmd»"
+            }
+          },
+          "400": {
+            "description": "无效输入"
+          },
+          "404": {
+            "description": "未找到"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["设备指令"],
+        "summary": "删除设备指令",
+        "description": "根据ID删除设备指令",
+        "operationId": "deleteDeviceCmd",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "指令ID",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          },
+          "400": {
+            "description": "无效ID"
+          },
+          "404": {
+            "description": "未找到"
+          }
+        }
+      }
+    },
+    "/api/device/firmware": {
+      "post": {
+        "tags": ["设备固件"],
+        "summary": "创建设备固件",
+        "description": "创建新的设备固件记录",
+        "operationId": "createDeviceFirmware",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "设备固件对象",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceFirmware"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "schema": {
+              "$ref": "#/definitions/Response«DeviceFirmware»"
+            }
+          },
+          "400": {
+            "description": "无效输入"
+          },
+          "500": {
+            "description": "服务器内部错误"
+          }
+        }
+      },
+      "get": {
+        "tags": ["设备固件"],
+        "summary": "获取设备固件列表",
+        "description": "分页获取设备固件列表",
+        "operationId": "getDeviceFirmwares",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "页码",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "每页数量",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 10
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "schema": {
+              "$ref": "#/definitions/Response«List«DeviceFirmware»»"
+            }
+          },
+          "500": {
+            "description": "服务器内部错误"
+          }
+        }
+      }
+    },
+    "/api/device/firmware/{id}": {
+      "get": {
+        "tags": ["设备固件"],
+        "summary": "获取设备固件详情",
+        "description": "根据ID获取设备固件详情",
+        "operationId": "getDeviceFirmwareById",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "固件ID",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "schema": {
+              "$ref": "#/definitions/Response«DeviceFirmware»"
+            }
+          },
+          "400": {
+            "description": "无效ID"
+          },
+          "404": {
+            "description": "未找到"
+          }
+        }
+      },
+      "put": {
+        "tags": ["设备固件"],
+        "summary": "更新设备固件",
+        "description": "根据ID更新设备固件",
+        "operationId": "updateDeviceFirmware",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "固件ID",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "设备固件对象",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceFirmware"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "schema": {
+              "$ref": "#/definitions/Response«DeviceFirmware»"
+            }
+          },
+          "400": {
+            "description": "无效输入"
+          },
+          "404": {
+            "description": "未找到"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["设备固件"],
+        "summary": "删除设备固件",
+        "description": "根据ID删除设备固件",
+        "operationId": "deleteDeviceFirmware",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "固件ID",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          },
+          "400": {
+            "description": "无效ID"
+          },
+          "404": {
+            "description": "未找到"
+          }
+        }
+      }
+    },
+    "/api/device/config": {
+      "post": {
+        "tags": ["设备配置"],
+        "summary": "创建设备配置",
+        "description": "创建新的设备配置记录",
+        "operationId": "createDeviceConfig",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "设备配置对象",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceConfig"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "schema": {
+              "$ref": "#/definitions/Response«DeviceConfig»"
+            }
+          },
+          "400": {
+            "description": "无效输入"
+          },
+          "500": {
+            "description": "服务器内部错误"
+          }
+        }
+      },
+      "get": {
+        "tags": ["设备配置"],
+        "summary": "获取设备配置列表",
+        "description": "分页获取设备配置列表",
+        "operationId": "getDeviceConfigs",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "页码",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "每页数量",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 10
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "schema": {
+              "$ref": "#/definitions/Response«List«DeviceConfig»»"
+            }
+          },
+          "500": {
+            "description": "服务器内部错误"
+          }
+        }
+      }
+    }
+  }
+}

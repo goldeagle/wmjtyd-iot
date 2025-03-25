@@ -5,6 +5,27 @@ app:
   embed: true
   root: "/static"
   prefork: true # prefork是否启用，默认true
+
+# 服务配置
+service:
+  enable_swagger: false # 是否启用swagger，默认false
+  enable_cors: true # 是否启用跨域，默认true
+  enable_gzip: true # 是否启用gzip，默认true
+  enable_rate_limiter: true # 是否启用限流，默认true
+  enable_recovery: true # 是否启用恢复，默认true
+  enable_validate: true # 是否启用验证，默认true
+  enable_i18n: true # 是否启用国际化，默认true
+  enable_secure: true # 是否启用安全，默认true
+  enable_helmet: true # 是否启用helmet，默认true
+  enable_compress: true # 是否启用压缩，默认true
+  enable_debug: false # 是否启用调试，默认true
+  enable_metrics: true # 是否启用指标，默认true
+  enable_pprof: true # 是否启用pprof，默认true
+  enable_tracer: false # 是否启用跟踪，默认true
+  enable_grpc: true # 是否启用grpc，默认true
+  enable_http2: true # 是否启用http2，默认true
+  enable_http3: true # 是否启用http3，默认true
+  enable_etag: true # 是否启用etag，默认true
   
 # 数据库配置
 database:

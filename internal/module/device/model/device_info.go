@@ -19,9 +19,7 @@ type DeviceInfo struct {
 	CreatedTime  int    `gorm:"comment:创建时间" json:"created_time"`
 	UpdatedTime  int    `gorm:"comment:更新时间" json:"updated_time"`
 	ModelID      int    `gorm:"comment:设备型号" json:"model_id"`
-	DataSourceID int    `gorm:"comment:信息来源" json:"data_source_id"`
 	LocationID   int    `gorm:"comment:投放地址" json:"location_id"`
-	ConfigureID  int    `gorm:"comment:组态id" json:"configure_id"`
 	UserID       int    `gorm:"comment:绑定用户的id" json:"user_id"`
 	GroupID      int    `gorm:"comment:绑定用户的分组" json:"group_id"`
 	OnlineTime   int    `gorm:"comment:上线时间" json:"online_time"`

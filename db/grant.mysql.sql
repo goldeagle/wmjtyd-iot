@@ -1,0 +1,1 @@
+GRANT ALL on wmjtyd-iot.* TO 'wmjtyd-iot'@'%' IDENTIFIED BY 'wmjtyd-iot';

@@ -1,0 +1,424 @@
+basePath: /
+host: localhost:8080
+info:
+  contact:
+    email: support@wmjtyd.com
+    name: API支持
+  description: 物联网设备管理平台API文档
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: IoT平台API文档
+  version: "1.0"
+paths:
+  /api/device/log:
+    post:
+      tags:
+        - 设备日志
+      summary: 创建设备日志
+      description: 创建新的设备日志记录
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: log
+          description: 设备日志信息
+          required: true
+          schema:
+            $ref: '#/definitions/DeviceLog'
+      responses:
+        '200':
+          description: 成功响应
+          schema:
+            $ref: '#/definitions/Response«DeviceLog»'
+        '400':
+          description: 错误请求
+          schema:
+            $ref: '#/definitions/Response'
+        '500':
+          description: 服务器错误
+          schema:
+            $ref: '#/definitions/Response'
+    get:
+      tags:
+        - 设备日志
+      summary: 获取设备日志列表
+      description: 分页获取设备日志列表
+      produces:
+        - application/json
+      parameters:
+        - name: page
+          in: query
+          description: 页码
+          required: false
+          type: integer
+          default: 1
+        - name: pageSize
+          in: query
+          description: 每页数量
+          required: false
+          type: integer
+          default: 10
+      responses:
+        '200':
+          description: 成功响应
+          schema:
+            $ref: '#/definitions/Response«List«DeviceLog»»'
+        '500':
+          description: 服务器错误
+          schema:
+            $ref: '#/definitions/Response'
+  /api/device/log/{id}:
+    get:
+      tags:
+        - 设备日志
+      summary: 获取设备日志
+      description: 根据ID获取设备日志详情
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: 日志ID
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: 成功响应
+          schema:
+            $ref: '#/definitions/Response«DeviceLog»'
+        '400':
+          description: 错误请求
+          schema:
+            $ref: '#/definitions/Response'
+        '404':
+          description: 未找到
+          schema:
+            $ref: '#/definitions/Response'
+    put:
+      tags:
+        - 设备日志
+      summary: 更新设备日志
+      description: 根据ID更新设备日志
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: 日志ID
+          required: true
+          type: integer
+        - in: body
+          name: log
+          description: 设备日志信息
+          required: true
+          schema:
+            $ref: '#/definitions/DeviceLog'
+      responses:
+        '200':
+          description: 成功响应
+          schema:
+            $ref: '#/definitions/Response«DeviceLog»'
+        '400':
+          description: 错误请求
+          schema:
+            $ref: '#/definitions/Response'
+        '500':
+          description: 服务器错误
+          schema:
+            $ref: '#/definitions/Response'
+    delete:
+      tags:
+        - 设备日志
+      summary: 删除设备日志
+      description: 根据ID删除设备日志
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: 日志ID
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: 成功响应
+          schema:
+            $ref: '#/definitions/Response'
+        '400':
+          description: 错误请求
+          schema:
+            $ref: '#/definitions/Response'
+        '500':
+          description: 服务器错误
+          schema:
+            $ref: '#/definitions/Response'
+  /api/device/cmd:
+    post:
+      tags:
+        - 设备指令
+      summary: 创建设备指令
+      description: 创建新的设备指令记录
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: cmd
+          description: 设备指令信息
+          required: true
+          schema:
+            $ref: '#/definitions/DeviceCmd'
+      responses:
+        '200':
+          description: 成功响应
+          schema:
+            $ref: '#/definitions/Response«DeviceCmd»'
+        '400':
+          description: 错误请求
+          schema:
+            $ref: '#/definitions/Response'
+        '500':
+          description: 服务器错误
+          schema:
+            $ref: '#/definitions/Response'
+    get:
+      tags:
+        - 设备指令
+      summary: 获取设备指令列表
+      description: 分页获取设备指令列表
+      produces:
+        - application/json
+      parameters:
+        - name: page
+          in: query
+          description: 页码
+          required: false
+          type: integer
+          default: 1
+        - name: pageSize
+          in: query
+          description: 每页数量
+          required: false
+          type: integer
+          default: 10
+      responses:
+        '200':
+          description: 成功响应
+          schema:
+            $ref: '#/definitions/Response«List«DeviceCmd»»'
+        '500':
+          description: 服务器错误
+          schema:
+            $ref: '#/definitions/Response'
+  /api/device/cmd/{id}:
+    get:
+      tags:
+        - 设备指令
+      summary: 获取设备指令
+      description: 根据ID获取设备指令详情
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: 指令ID
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: 成功响应
+          schema:
+            $ref: '#/definitions/Response«DeviceCmd»'
+        '400':
+          description: 错误请求
+          schema:
+            $ref: '#/definitions/Response'
+        '404':
+          description: 未找到
+          schema:
+            $ref: '#/definitions/Response'
+    put:
+      tags:
+        - 设备指令
+      summary: 更新设备指令
+      description: 根据ID更新设备指令
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: 指令ID
+          required: true
+          type: integer
+        - in: body
+          name: cmd
+          description: 设备指令信息
+          required: true
+          schema:
+            $ref: '#/definitions/DeviceCmd'
+      responses:
+        '200':
+          description: 成功响应
+          schema:
+            $ref: '#/definitions/Response«DeviceCmd»'
+        '400':
+          description: 错误请求
+          schema:
+            $ref: '#/definitions/Response'
+        '500':
+          description: 服务器错误
+          schema:
+            $ref: '#/definitions/Response'
+    delete:
+      tags:
+        - 设备指令
+      summary: 删除设备指令
+      description: 根据ID删除设备指令
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: 指令ID
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: 成功响应
+          schema:
+            $ref: '#/definitions/Response'
+        '400':
+          description: 错误请求
+          schema:
+            $ref: '#/definitions/Response'
+        '500':
+          description: 服务器错误
+          schema:
+            $ref: '#/definitions/Response'
+definitions:
+  DeviceLog:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      device_id:
+        type: integer
+        format: int64
+      log_type:
+        type: string
+      log_level:
+        type: string
+      content:
+        type: string
+      timestamp:
+        type: integer
+        format: int64
+      created_at:
+        type: string
+        format: date-time
+      updated_at:
+        type: string
+        format: date-time
+      deleted_at:
+        type: string
+        format: date-time
+  DeviceCmd:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      device_id:
+        type: integer
+        format: int64
+      cmd_type:
+        type: string
+      cmd_data:
+        type: string
+      status:
+        type: string
+      exec_time:
+        type: integer
+        format: int64
+      result:
+        type: string
+      error_msg:
+        type: string
+      created_at:
+        type: string
+        format: date-time
+      updated_at:
+        type: string
+        format: date-time
+      deleted_at:
+        type: string
+        format: date-time
+  Response:
+    type: object
+    properties:
+      code:
+        type: integer
+      message:
+        type: string
+      data:
+        type: object
+  Response«DeviceLog»:
+    type: object
+    properties:
+      code:
+        type: integer
+      message:
+        type: string
+      data:
+        $ref: '#/definitions/DeviceLog'
+  Response«List«DeviceLog»»:
+    type: object
+    properties:
+      code:
+        type: integer
+      message:
+        type: string
+      data:
+        type: array
+        items:
+          $ref: '#/definitions/DeviceLog'
+      total:
+        type: integer
+  Response«DeviceCmd»:
+    type: object
+    properties:
+      code:
+        type: integer
+      message:
+        type: string
+      data:
+        $ref: '#/definitions/DeviceCmd'
+  Response«List«DeviceCmd»»:
+    type: object
+    properties:
+      code:
+        type: integer
+      message:
+        type: string
+      data:
+        type: array
+        items:
+          $ref: '#/definitions/DeviceCmd'
+      total:
+        type: integer
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

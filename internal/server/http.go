@@ -2,12 +2,14 @@ package server
 
 import (
 	"context"
+	deviceHttp "wmjtyd-iot/internal/module/device/endpoint/http"
 	"wmjtyd-iot/internal/server/route"
 
 	"go.uber.org/zap"
 	"gorm.io/gorm"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/swagger"
 )
 
 type HTTPServer struct {
@@ -18,10 +20,17 @@ type HTTPServer struct {
 func NewHTTPServer(addr string, logger *zap.Logger, db *gorm.DB) *HTTPServer {
 	app := fiber.New()
 
+	// Swagger UI路由
+	app.Get("/swagger/*", swagger.HandlerDefault)
+
 	server := &HTTPServer{
 		App:    app,
 		logger: logger,
 	}
+
+	// 注册设备路由（通过routes.go统一注册）
+	deviceHttp.RegisterDeviceRoutes(app.Group("/api"), db)
+
 	return server
 }
 
