@@ -2,6 +2,7 @@ package tsdb
 
 import (
 	"database/sql"
+	"fmt"
 	"log"
 
 	"github.com/spf13/viper"
@@ -10,6 +11,14 @@ import (
 )
 
 var TaosDB *sql.DB
+
+// GetTDEngine returns the TDEngine database connection
+func GetTDEngine() (*sql.DB, error) {
+	if TaosDB == nil {
+		return nil, fmt.Errorf("TDEngine connection not initialized")
+	}
+	return TaosDB, nil
+}
 
 //var TaosConn *af.Connector
 

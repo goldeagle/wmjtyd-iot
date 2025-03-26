@@ -1,6 +1,6 @@
 # wmjtyd-iot Backend CLI
 
-wmjtyd-iot (IoT Control and Communication Platform) is a backend system for IOT system. It provides CLI tools for database migration, server management and version control.
+wmjtyd-iot (IoT Control and Communication Platform) is a backend system for IOT system.
 
 ## Available Commands
 

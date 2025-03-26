@@ -13,6 +13,7 @@ package cmd
 import (
 	"fmt"
 	"log"
+	"wmjtyd-iot/internal/connector/message"
 	"wmjtyd-iot/internal/server"
 
 	"github.com/gofiber/fiber/v2"
@@ -121,6 +122,13 @@ var serveCmd = &cobra.Command{
 			httpServer.App.Use(recover.New())
 			go func() {
 				log.Fatal(httpServer.Start())
+			}()
+		}
+
+		// Start MQTT client only in main process when prefork is enabled
+		if !prefork || !fiber.IsChild() {
+			go func() {
+				message.StartMQTTClient()
 			}()
 		}
 
