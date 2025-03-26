@@ -10,6 +10,7 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/swagger"
+	"github.com/spf13/viper"
 )
 
 type HTTPServer struct {
@@ -20,8 +21,10 @@ type HTTPServer struct {
 func NewHTTPServer(addr string, logger *zap.Logger, db *gorm.DB) *HTTPServer {
 	app := fiber.New()
 
-	// Swagger UI路由
-	app.Get("/swagger/*", swagger.HandlerDefault)
+	// 根据配置决定是否启用Swagger UI
+	if viper.GetBool("service.enable_swagger") {
+		app.Get("/swagger/*", swagger.HandlerDefault)
+	}
 
 	server := &HTTPServer{
 		App:    app,
