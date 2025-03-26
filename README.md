@@ -81,7 +81,7 @@ wmjtyd-iot version
 The following Makefile commands are available for development and build automation:
 
 - `make daemon`: Build the application's backend daemon only
-- `make build`: Build the application
+- `make build`: Build the application with CPU arch & OS targeting
 - `make clean`: Clean build artifacts
 - `make test`: Run tests
 - `make fmt`: Format code

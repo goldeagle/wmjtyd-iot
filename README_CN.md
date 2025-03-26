@@ -81,7 +81,7 @@ wmjtyd-iot version
 以下Makefile命令可用于开发和构建自动化：
 
 - `make daemon`: 仅构建应用程序的后台守护进程
-- `make build`: 构建应用程序
+- `make build`: 基于CPU架构和目标OS构建应用程序
 - `make clean`: 清理构建产物
 - `make test`: 运行测试
 - `make fmt`: 格式化代码
