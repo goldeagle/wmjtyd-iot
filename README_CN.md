@@ -95,12 +95,12 @@ wmjtyd-iot version
 1. 克隆仓库：
    ```bash
    git clone https://github.com/goldeagle/wmjtyd-iot.git
-   cd wmjtyd-iot-platform
+   cd wmjtyd-iot
    ```
 
 2. 构建二进制文件：
    ```bash
-   go build
+   make daemon
    ```
 
 3. 安装依赖：

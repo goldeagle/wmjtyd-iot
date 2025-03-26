@@ -95,12 +95,12 @@ The following Makefile commands are available for development and build automati
 1. Clone the repository:
    ```bash
    git clone https://github.com/goldeagle/wmjtyd-iot.git
-   cd wmjtyd-iot-platform
+   cd wmjtyd-iot
    ```
 
 2. Build the binary:
    ```bash
-   go build
+   make daemon
    ```
 
 3. Install dependencies:
