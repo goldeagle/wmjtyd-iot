@@ -90,6 +90,16 @@ The following Makefile commands are available for development and build automati
 - `make lint`: Run static analysis
 - `make help`: Show available commands and their descriptions
 
+### Docker Commands
+The following Docker-related commands are available for containerized deployment:
+
+- `make docker-build`: Build Docker image
+- `make docker-run`: Run Docker container
+- `make docker-push`: Push Docker image to registry
+- `make docker-compose-up`: Start all dependent services (MySQL, Redis, EMQX, etc.)
+- `make docker-compose-down`: Stop dependent services
+- `make docker-compose-logs`: View service logs
+
 ## Installation
 
 1. Clone the repository:

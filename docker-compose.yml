@@ -1,0 +1,72 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - redis
+      - mysql
+      - mqtt
+      - minio
+      - tdengine
+    environment:
+      - DB_HOST=mysql
+      - REDIS_HOST=redis
+      - MQTT_HOST=mqtt
+      - MINIO_HOST=minio
+      - TDENGINE_HOST=tdengine
+
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: iot_platform
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./db:/docker-entrypoint-initdb.d
+
+  mqtt:
+    image: emqx/emqx:latest
+    ports:
+      - "1883:1883"
+      - "8083:8083"
+      - "18083:18083"
+    environment:
+      EMQX_DASHBOARD__DEFAULT_USERNAME: admin
+      EMQX_DASHBOARD__DEFAULT_PASSWORD: public
+
+  minio:
+    image: minio/minio
+    command: server /data
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    ports:
+      - "9000:9000"
+    volumes:
+      - minio_data:/data
+
+  tdengine:
+    image: tdengine/tdengine:latest
+    ports:
+      - "6030:6030"
+      - "6041:6041"
+    volumes:
+      - tdengine_data:/var/lib/taos
+
+volumes:
+  redis_data:
+  mysql_data:
+  minio_data:
+  tdengine_data:

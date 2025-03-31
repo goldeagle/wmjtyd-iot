@@ -90,6 +90,16 @@ wmjtyd-iot version
 - `make lint`: 运行静态分析
 - `make help`: 显示可用命令及其描述
 
+### Docker命令
+以下Docker相关命令可用于容器化部署：
+
+- `make docker-build`: 构建Docker镜像
+- `make docker-run`: 运行Docker容器
+- `make docker-push`: 推送Docker镜像到仓库
+- `make docker-compose-up`: 启动所有依赖服务(MySQL, Redis, EMQX等)
+- `make docker-compose-down`: 停止依赖服务
+- `make docker-compose-logs`: 查看服务日志
+
 ## 安装
 
 1. 克隆仓库：

@@ -47,6 +47,30 @@ lint: ## Run static analysis
 	@echo "Running static analysis..."
 	golangci-lint run
 
+docker-build: ## Build Docker image
+	@echo "Building Docker image..."
+	docker build -t $(APP_NAME) .
+
+docker-run: ## Run Docker container
+	@echo "Running Docker container..."
+	docker run -p 8080:8080 --name $(APP_NAME) $(APP_NAME)
+
+docker-push: ## Push Docker image to registry
+	@echo "Pushing Docker image..."
+	@echo "Please set your registry info before using this command"
+
+docker-compose-up: ## Start dependent services with docker-compose
+	@echo "Starting dependent services..."
+	docker-compose up -d
+
+docker-compose-down: ## Stop dependent services
+	@echo "Stopping dependent services..."
+	docker-compose down
+
+docker-compose-logs: ## View service logs
+	@echo "Showing service logs..."
+	docker-compose logs -f
+
 help: ## Show this help message
 	@echo "Available targets:"
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
